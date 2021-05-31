@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:scoreapp/api/api_service.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:scoreapp/models/login_model.dart';
@@ -117,13 +117,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                   // call the ogin api if credential is valid
                                   if (validateAndSave()) {
                                     APIService apiService = new APIService();
-                                    // apiService
-                                    //     .login(requestModel)
-                                    //     .then((value) 
-                                    bool value = apiService.login(requestModel);
-                                    // {
-                                      print(value);
-                                      if (value == true) {
+                                    apiService
+                                        .login(requestModel)
+                                        .then((value) {
+                                      if (value.token.isNotEmpty) {
+                                        // save the token to flutter secure storage
+                                        UserSecureStorage.setUserToken(
+                                            value.token);
                                         // send user to specific home page based on role
                                         return directToHome();
 
@@ -132,7 +132,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                         //   content:
                                         //       Text(value.token.toString()),
                                         //       // const Text('Login successful'),
-                                        // ));
                                       } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
@@ -140,9 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               "Check your email and password and try again."),
                                         ));
                                       }
-                                    // });
-                                    // print(requestModel.toJson());
-
+                                    });
                                   } else {
                                     throw Exception("Validation Failed.");
                                   }
@@ -214,8 +211,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void directToHome() async {
     // read the shared preference to know the user's role
     // and based on role navigate to teacher's or student's homepage
+    APIService apiS = new APIService();
+    String userToken = await UserSecureStorage.getUserToken();
+    apiS.setUserDetails(userToken);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    try {
+    if (prefs.getBool('isTeacher') == false ||
+        prefs.getBool('isStudent') == false) {
       if (prefs.getBool('isTeacher')) {
         Navigator.pushAndRemoveUntil(
             context,
@@ -229,8 +230,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 builder: (context) => HomeScreen("Student's Homepage")),
             (route) => false);
       }
-    } catch (e) {
-      throw Exception('Some error occured while navigating to Dashboard.');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Something went wrong while navigating to dashboard!"),
+      ));
+      throw Exception('field value cannot be null.');
     }
   }
 }
