@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:scoreapp/models/login_model.dart';
 import 'package:scoreapp/utils/secure_storage.dart';
-import 'homescreen.dart';
+import 'homescreen_t.dart';
 
 //setting up some global variables
 TextStyle primary = TextStyle(fontSize: 25);
