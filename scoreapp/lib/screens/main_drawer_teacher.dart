@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scoreapp/api/api_service.dart';
+import 'package:scoreapp/utils/secure_storage.dart';
 
 class MainDrawerTeacher extends StatelessWidget {
   // const MainDrawerTeacher({ Key? key }) : super(key: key);
-
+  APIService _apiService = APIService();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -67,7 +69,10 @@ class MainDrawerTeacher extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Get.offAllNamed("/logout");
+              UserSecureStorage.removeUserToken("token");
+              // remove data preferences stored 
+              _apiService.removeUserDetails();
+              Get.offAllNamed("/splash");
             },
           ),
         ],

@@ -3,8 +3,11 @@ import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/models/home_screen_model.dart';
 
 class ClassroomController extends GetxController {
+  // Controller for fetching the specific classroom in which 
+  //  the currently user is enrolled/ or created
+  
   var classroomList = List<ClassListModel>().obs;
-  var isLoading = true.obs;
+  var isLoading = true.obs; // to show circular loading moving icon
 
   @override
   void onInit() {

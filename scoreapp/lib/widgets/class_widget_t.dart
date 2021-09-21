@@ -20,6 +20,9 @@ import 'package:scoreapp/models/home_screen_model.dart';
 // }
 
 class ClassBox extends StatefulWidget {
+  // this widget acts as a card for classrooms
+  // primariely used on the homescreen to display list of classrooms
+
   final ClassListModel classroomList;
   ClassBox(this.classroomList);
 

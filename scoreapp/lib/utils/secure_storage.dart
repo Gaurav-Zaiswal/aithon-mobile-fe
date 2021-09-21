@@ -5,16 +5,18 @@ class UserSecureStorage {
   static const _KeyUserToken = 'token';
 
   static Future setUserToken(String token) async {
+    // stores token of currently logged in users to local storage
+
     try {
       await _userStorage.write(key: _KeyUserToken, value: token);
-      // print('token written successfully');
     } catch (e) {
       throw Exception('Error while login in due to ' + e);
     }
   }
 
   static Future<String> getUserToken() async {
-    // print(await _storage.read(key: _KeyUserToken));
+    // returns token of currently logged in user
+
     try {
       String token = await _userStorage.read(key: _KeyUserToken);
       return token;
@@ -24,6 +26,8 @@ class UserSecureStorage {
   }
 
   static Future removeUserToken(String key) async {
+    // removes token of currenlty logged in user
+
     try {
       var removeToken = await _userStorage.delete(key: key);
       return removeToken;
