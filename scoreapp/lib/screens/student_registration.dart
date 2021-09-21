@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 // import 'package:scoreapp/models/login_model.dart';
 import 'package:scoreapp/models/register_student_model.dart';
@@ -227,7 +228,8 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                                         Colors.blue),
                               ),
                               onPressed: () {
-                                Navigator.pushNamed(context, "/login");
+                                Get.offAllNamed("/login");
+                                // Navigator.pushNamed(context, "/login");
                               },
                               child: Text('Login Here!'),
                             )

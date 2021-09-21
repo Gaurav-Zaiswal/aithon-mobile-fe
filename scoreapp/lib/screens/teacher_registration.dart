@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 // import 'package:scoreapp/models/login_model.dart';
 import 'package:scoreapp/models/register_teacher_model.dart';
@@ -210,7 +211,8 @@ class _TeacherRegistrationState extends State<TeacherRegistration> {
                                         ));
                                       } else {
                                         // print(requestModel.toJson());
-                                        Navigator.pushNamed(context, "/login");  
+                                        Get.offAllNamed("/login");
+                                        // Navigator.pushNamed(context, "/login");  
                                       }
                                     });
                                   } else {

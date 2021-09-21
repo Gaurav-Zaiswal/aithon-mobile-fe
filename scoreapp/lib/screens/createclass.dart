@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'main_drawer_teacher.dart';
+
 TextStyle primary = TextStyle(fontSize: 25);
 
 class CreateClass extends StatefulWidget {
@@ -57,6 +59,10 @@ class _CreateClassState extends State<CreateClass> {
     );
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Create a Classroom'),
+      ),
+      drawer: MainDrawerTeacher(),
       body: Center(
         child: Container(
           color: Colors.white,

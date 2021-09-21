@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -141,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       }
                                     });
                                   } else {
-                                    throw Exception("Validation Failed.");
+                                     throw Exception("Validation Failed.");
                                   }
                                 },
                                 child: Text("Log in"),
@@ -165,8 +166,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 Colors.blue),
                                       ),
                                       onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, 'register-teacher');
+                                        Get.offAllNamed("/register-teacher");
+                                        // Navigator.pushNamed(
+                                        //     context, 'register-teacher');
                                       },
                                       child: Text('Register as teacher'),
                                     ),
@@ -179,8 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 Colors.blue),
                                       ),
                                       onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, "/register-student");
+                                        Get.offAllNamed("/register-student");
+                                        // Navigator.pushNamed(
+                                        //     context, "/register-student");
                                       },
                                       child: Text('Register as student'),
                                     ),

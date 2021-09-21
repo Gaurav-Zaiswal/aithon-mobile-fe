@@ -19,7 +19,16 @@ class UserSecureStorage {
       String token = await _userStorage.read(key: _KeyUserToken);
       return token;
     } catch (e) {
-      throw Exception('Something went wrong ' + e);
+      throw Exception('Something went wrong while reading the cache' + e);
+    }
+  }
+
+  static Future removeUserToken(String key) async {
+    try {
+      var removeToken = await _userStorage.delete(key: key);
+      return removeToken;
+    } catch (e) {
+      throw Exception('Something went wrong while clearing the cache' + e);
     }
   }
 }

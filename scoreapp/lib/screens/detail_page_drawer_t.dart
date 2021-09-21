@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class MainDrawerTeacher extends StatelessWidget {
+class DetailPageDrawerTeacher extends StatelessWidget {
   // const MainDrawerTeacher({ Key? key }) : super(key: key);
 
   @override
@@ -19,11 +18,36 @@ class MainDrawerTeacher extends StatelessWidget {
                   Text(
                     'Welcome, Teacher',
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  )
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    'Class Code:',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    'QsH56t',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
+          // ListTile(
+          //   leading: Icon(Icons.vpn_key),
+          //   title: Text(
+          //     'QsH56t',
+          //     style: TextStyle(
+          //       fontSize: 18,
+          //     ),
+          //   ),
+          //   onTap: null,
+          // ),
           ListTile(
             leading: Icon(Icons.home),
             title: Text(
@@ -32,26 +56,12 @@ class MainDrawerTeacher extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            onTap: () {
-              Get.toNamed("/");
-            },
+            onTap: null,
           ),
           ListTile(
             leading: Icon(Icons.create),
             title: Text(
-              'Create Class',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            onTap: () {
-              Get.toNamed("/create-class");
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.add),
-            title: Text(
-              'Join a class',
+              'Create Assignment',
               style: TextStyle(
                 fontSize: 18,
               ),
@@ -66,9 +76,7 @@ class MainDrawerTeacher extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            onTap: () {
-              Get.offAllNamed("/logout");
-            },
+            onTap: null,
           ),
         ],
       ),
