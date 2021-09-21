@@ -5,6 +5,7 @@ import 'package:scoreapp/screens/class_details_t.dart';
 import 'package:scoreapp/screens/createclass.dart';
 import 'package:scoreapp/screens/homescreen_t.dart';
 import 'package:scoreapp/screens/loginscreen.dart';
+import 'package:scoreapp/screens/splash_screen.dart';
 import 'package:scoreapp/screens/student_registration.dart';
 import 'package:scoreapp/screens/teacher_registration.dart';
 
@@ -16,7 +17,7 @@ class LoginApp extends StatelessWidget {
     return GetMaterialApp(
       title: "Login App",
       // home: LoginScreen(),
-      initialRoute:'/login', 
+      initialRoute:'/splash', 
       //When using initialRoute, don’t define a home property.
       // routes: {  
       //   '/': (context) => ClassDetailScreenTeacher('apple'),
@@ -28,6 +29,7 @@ class LoginApp extends StatelessWidget {
       // },
 
       getPages: [
+        GetPage(name: '/splash', page: () => SplashScreen()),
         GetPage(name: "/", page: () => HomeScreen("Test User")),
         GetPage(name: "/landing-screen", page: () => HomeScreen("Test User")),
         GetPage(name: "/register-teacher", page: () => TeacherRegistration()),
