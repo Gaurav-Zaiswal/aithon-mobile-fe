@@ -53,12 +53,6 @@ class _ClassBoxState extends State<ClassBox> {
                   child: const Text('Enter into Classroom'),
                   onPressed: () {/* ... */},
                 ),
-                const SizedBox(width: 8),
-                // TextButton(
-                //   child: const Text('LISTEN'),
-                //   onPressed: () {/* ... */},
-                // ),
-                const SizedBox(width: 8),
               ],
             ),
           ],

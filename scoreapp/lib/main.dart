@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:scoreapp/screens/class_details_t.dart';
+import 'package:scoreapp/screens/create_class.dart';
 import 'package:scoreapp/screens/createclass.dart';
 import 'package:scoreapp/screens/homescreen_t.dart';
 import 'package:scoreapp/screens/loginscreen.dart';
@@ -37,7 +38,8 @@ class LoginApp extends StatelessWidget {
         GetPage(name: "/login", page: () => LoginScreen()),
         GetPage(name: "/logout", page: () => LoginScreen()),
 
-        GetPage(name: "/create-class", page: () => CreateClass()),
+        // GetPage(name: "/create-class", page: () => CreateClass()),
+        GetPage(name: "/create-class", page: () => CreateClassroom()),
         GetPage(name: "/view-class", page: () => ClassDetailScreenTeacher('teacher')),
         GetPage(name: "/create-assignemnt", page: () => LoginScreen()),
         GetPage(name: "/logout", page: () => LoginScreen()),

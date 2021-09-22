@@ -3,7 +3,7 @@ import 'package:scoreapp/screens/main_drawer_teacher.dart';
 import 'dart:ui' as ui;
 import 'package:scoreapp/utils/HeaderFooter.dart';
 import 'package:scoreapp/widgets/class_widget_t.dart';
-import 'createclass.dart';
+import 'create_class.dart';
 import 'detail_page_drawer_t.dart';
 
 // classroom detail screen for teacher

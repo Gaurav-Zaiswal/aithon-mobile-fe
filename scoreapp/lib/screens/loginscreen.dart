@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String username;
   String password;
 
+  APIService apiService = new APIService();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
   bool hidePassword = true;
@@ -117,7 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 onPressed: () {
                                   // call the ogin api if credential is valid
                                   if (validateAndSave()) {
-                                    APIService apiService = new APIService();
                                     apiService
                                         .login(requestModel)
                                         .then((value) {
@@ -142,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       }
                                     });
                                   } else {
-                                     throw Exception("Validation Failed.");
+                                    throw Exception("Validation Failed.");
                                   }
                                 },
                                 child: Text("Log in"),
@@ -214,30 +214,51 @@ class _LoginScreenState extends State<LoginScreen> {
   void directToHome() async {
     // read the shared preference to know the user's role
     // and based on role navigate to teacher's or student's homepage
-    APIService apiS = new APIService();
+    // APIService apiS = new APIService();
+
+    // read user token from secure storage
     String userToken = await UserSecureStorage.getUserToken();
-    apiS.setUserDetails(userToken);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool('isTeacher') == false ||
-        prefs.getBool('isStudent') == false) {
-      if (prefs.getBool('isTeacher')) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen("Teacher's Homepage")),
-            (route) => false);
-      } else {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen("Student's Homepage")),
-            (route) => false);
+    // set user details such as isTeacher flag on shared preference
+    final isSuccess = await apiService.setUserDetails(userToken);
+
+    if (isSuccess == true) {
+      // if the setUserDetails returns true then check is the user is teacher/student
+      // and redirect them accordingly
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if (prefs.getBool('isTeacher') && !prefs.getBool('isStudent')) {
+        Get.offAllNamed("/HomeScreen", arguments: "Teacher's homepage");
+      } else if (prefs.getBool('isStudent') && !prefs.getBool('isTeacher')) {
+        Get.offAllNamed("/HomeScreen", arguments: "students homepage");
       }
-    } else {
+    }else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Something went wrong while navigating to dashboard!"),
       ));
       throw Exception('field value cannot be null.');
     }
+
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // if (prefs.getBool('isTeacher') == false ||
+    //     prefs.getBool('isStudent') == false) {
+    //   if (prefs.getBool('isTeacher')) {
+    //     Navigator.pushAndRemoveUntil(
+    //         context,
+    //         MaterialPageRoute(
+    //             builder: (context) => HomeScreen("Teacher's Homepage")),
+    //         (route) => false);
+    //   } else {
+    //     Navigator.pushAndRemoveUntil(
+    //         context,
+    //         MaterialPageRoute(
+    //             builder: (context) => HomeScreen("Student's Homepage")),
+    //         (route) => false);
+    //   }
+    // } else {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     content: Text("Something went wrong while navigating to dashboard!"),
+    //   ));
+    //   throw Exception('field value cannot be null.');
+    // }
   }
 }

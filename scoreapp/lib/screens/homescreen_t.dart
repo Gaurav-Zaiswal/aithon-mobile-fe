@@ -21,10 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final ClassroomController classroomController =
       Get.put(ClassroomController());
 
-  // final List<Map> myProducts =
-  //     List.generate(100, (index) => {"id": index, "name": "Class OOSD"})
-  //         .toList();
-
   @override
   Widget build(BuildContext context) {
     Widget buildClasses() => SliverToBoxAdapter(child: Obx(
@@ -35,25 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
             return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 1,
-                    // crossAxisSpacing: 5,
+                    crossAxisSpacing: 5,
                     // mainAxisSpacing: 20
                     ),
                 itemCount: classroomController.classroomList.length,
                 primary: false,
                 shrinkWrap: true,
-
-                // itemBuilder: (BuildContext context, index) => ClassBox(),
-                // itemBuilder: (BuildContext ctx, index) {
-                //   return Container(
-                //     alignment: Alignment.center,
-                //     // height: 20,
-                //     padding: EdgeInsets.only(left: 10, right: 10),
-                //     child: Text(myProducts[index]["name"]),
-                //     decoration: BoxDecoration(
-                //         color: Colors.amber,
-                //         borderRadius: BorderRadius.circular(15)),
-                //   );
-                // }),
 
                 itemBuilder: (BuildContext ctx, index) {
                   return ClassBox(classroomController.classroomList[index]);
@@ -70,8 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           SliverAppBar(
             title: Text('Joined Classes'),
+            // title: Text(username),
+
             backgroundColor: Theme.of(context).primaryColor,
-            expandedHeight: 200,
+            expandedHeight: 250,
             floating: true,
             stretch: true,
             pinned: true,
