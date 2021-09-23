@@ -25,22 +25,22 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Widget buildClasses() => SliverToBoxAdapter(child: Obx(
           () {
-            if (classroomController.isLoading.value) 
+            if (classroomController.isLoading.value)
               return Center(child: CircularProgressIndicator());
             else
-            return GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 5,
-                    // mainAxisSpacing: 20
-                    ),
-                itemCount: classroomController.classroomList.length,
-                primary: false,
-                shrinkWrap: true,
-
-                itemBuilder: (BuildContext ctx, index) {
-                  return ClassBox(classroomController.classroomList[index]);
-                });
+              return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  itemCount: classroomController.classroomList.length,
+                  primary: false,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext ctx, index) {
+                    return ClassBox(classroomController.classroomList[index]);
+                    // return ClassBox("gaurav jaiswal 1234");
+                  
+                  });
           },
         ));
 
@@ -65,9 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1104&q=80',
                 fit: BoxFit.cover,
               ),
-            stretchModes:  [
-              StretchMode.fadeTitle,
-            ],
+              stretchModes: [
+                StretchMode.fadeTitle,
+              ],
               centerTitle: true,
             ),
           ),
