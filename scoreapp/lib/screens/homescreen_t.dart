@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   primary: false,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext ctx, index) {
-                    return ClassBox(classroomController.classroomList[index]);
+                    return ClassBox(data: classroomController.classroomList[index],);
                     // return ClassBox("gaurav jaiswal 1234");
                   
                   });

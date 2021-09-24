@@ -23,7 +23,10 @@ class ClassroomController extends GetxController {
     try {
       var classrooms = await APIService.getClassrooms();
       if (classrooms != null) {
-        classroomList.value = classrooms;
+        for (int i = 0; i < classrooms.length; i++) {
+          classroomList.add(classrooms[i]);
+        }
+        // classroomList.value = classrooms;
       }
     } finally {
       isLoading(false);

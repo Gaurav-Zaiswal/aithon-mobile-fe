@@ -16,11 +16,13 @@ import 'package:scoreapp/models/home_screen_model.dart';
 // }
 
 class ClassBox extends StatelessWidget {
+  ClassBox({@required this.data});
+  ClassListModel data;
 
-  static ClassListModel classroomList;
-  // final ClassroomController classroomList;
-  static var t = classroomList.className;
-  ClassBox(t);
+  // static ClassListModel classroomList;
+  // // final ClassroomController classroomList;
+  // static var t = classroomList.className;
+  // ClassBox(t);
   // print(classroomList);
 
   @override
@@ -32,22 +34,31 @@ class ClassBox extends StatelessWidget {
         onTap: () {
           print('Card tapped.');
         },
-        child: Center(
+        
+        
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const ListTile(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.class_)
+                ],
+              ),
+              SizedBox(height:10),
+              ListTile(
                 // leading: Icon(Icons.class_),
                 title: Text(
-                  "programming in java",
+                  data.className,
                   style: TextStyle(color: Colors.white70),
                 ),
                 dense: false,
                 subtitle: Text(
-                    'this is a java class. Hope everyone will have fun. Enjoy!'),
+                  data.classDescription,
+                ),
               ),
             ],
-          ),
+          
         ),
       ),
     );
