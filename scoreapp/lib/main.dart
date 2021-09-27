@@ -20,14 +20,6 @@ class LoginApp extends StatelessWidget {
       // home: LoginScreen(),
       initialRoute:'/splash', 
       //When using initialRoute, don’t define a home property.
-      // routes: {  
-      //   '/': (context) => ClassDetailScreenTeacher('apple'),
-      //   // '/': (context) => HomeScreen('apple'),
-      //   '/register-teacher': (context) => TeacherRegistration(),
-      //   '/register-student': (context) => StudentRegistration(),
-      //   '/login': (context) => LoginScreen(),
-      //   // '/landing-screen': (context) => HomeScreen(username),
-      // },
 
       getPages: [
         GetPage(name: '/splash', page: () => SplashScreen()),
@@ -40,7 +32,7 @@ class LoginApp extends StatelessWidget {
 
         // GetPage(name: "/create-class", page: () => CreateClass()),
         GetPage(name: "/create-class", page: () => CreateClassroom()),
-        GetPage(name: "/view-class", page: () => ClassDetailScreenTeacher('teacher')),
+        GetPage(name: "/view-class/:id", page: () => ClassDetailScreenTeacher()),
         GetPage(name: "/create-assignemnt", page: () => LoginScreen()),
         GetPage(name: "/logout", page: () => LoginScreen()),
       ]

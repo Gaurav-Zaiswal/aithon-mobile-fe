@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:scoreapp/models/create_feed_model.dart';
 import 'package:scoreapp/models/create_classroom_model.dart';
 import 'package:scoreapp/models/home_screen_model.dart';
 import "dart:convert";
@@ -166,7 +167,7 @@ class APIService {
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
-      'authorization': 'token ${token}'
+      'authorization': 'token $token'
     };
     final body = jsonEncode(requestModel.toJson());
 
@@ -187,6 +188,40 @@ class APIService {
       print(token);
       print(response.statusCode);
       throw Exception("Failed to create the classroom");
+    }
+  }
+
+  Future<CreateFeedModel> postFeed(CreateFeedModel requestModel, String id) async {
+    // create feed for classroom
+
+    String url =
+        "https://gauravjaiswal.pythonanywhere.com/feed/api/$id/create/";
+    var token = await UserSecureStorage.getUserToken();
+    print(requestModel.toJson());
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'authorization': 'token $token'
+    };
+    final body = jsonEncode(requestModel.toJson());
+
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400) {
+      var jsonString = response.body;
+      return createFeedModelFromJson(jsonString);
+    } else if (response.statusCode == 403) {
+      throw Exception('forbidden: You do not have permission to post the feed');
+    } else {
+      // print(token);
+      // print(response.statusCode);
+      throw Exception("Failed to post the feed");
     }
   }
 }

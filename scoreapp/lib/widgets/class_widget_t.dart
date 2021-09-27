@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:scoreapp/controllers/classroom_controller.dart';
 import 'package:scoreapp/models/home_screen_model.dart';
 
@@ -28,37 +29,35 @@ class ClassBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.blueGrey[400],
+      color: Color(0xFF150259),
       child: InkWell(
         splashColor: Colors.grey.withAlpha(100),
         onTap: () {
-          print('Card tapped.');
+          // pass classroom_id ->int in url below
+          Get.toNamed(
+            '/view-class/${data.id}',
+          );
         },
-        
-        
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(Icons.class_)
-                ],
+        child: Column( 
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [Icon(Icons.class_)],
+            ),
+            SizedBox(height: 10),
+            ListTile(
+              // leading: Icon(Icons.class_),
+              title: Text(
+                data.className,
+                style: TextStyle(color: Colors.white70),
               ),
-              SizedBox(height:10),
-              ListTile(
-                // leading: Icon(Icons.class_),
-                title: Text(
-                  data.className,
-                  style: TextStyle(color: Colors.white70),
-                ),
-                dense: false,
-                subtitle: Text(
-                  data.classDescription,
-                ),
+              dense: false,
+              subtitle: Text(
+                data.classDescription,
               ),
-            ],
-          
+            ),
+          ],
         ),
       ),
     );
