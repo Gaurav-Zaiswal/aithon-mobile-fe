@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:scoreapp/models/create_feed_model.dart';
 import 'package:scoreapp/models/create_classroom_model.dart';
+import 'package:scoreapp/models/feed_list_model.dart';
 import 'package:scoreapp/models/home_screen_model.dart';
 import "dart:convert";
 
@@ -222,6 +223,32 @@ class APIService {
       // print(token);
       // print(response.statusCode);
       throw Exception("Failed to post the feed");
+    }
+  }
+
+  static Future<List<ClassroomFeedListModel>> getFeeds(String classId) async {
+    // get list of enrolled classroom of either teacher or student
+    // show them on homescreen
+
+    // final storage = new FlutterSecureStorage();
+
+    String url = "https://gauravjaiswal.pythonanywhere.com/feed/api/$classId/list/";
+    var token = await UserSecureStorage.getUserToken();
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.authorizationHeader: 'token $token',
+      },
+    );
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400) {
+      var jsonString = response.body;
+      return classroomFeedListModelFromJson(jsonString);
+    } else {
+      // print(response.statusCode);
+      throw Exception('Failed to load the Data!');
     }
   }
 }
