@@ -16,6 +16,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
+  TextEditingController classCodeController = TextEditingController();
 
   ClassroomJoinModel requestModel;
 
@@ -40,59 +41,71 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Form(
-                          key: globalFormKey,
+                            key: globalFormKey,
                             child: Column(
-                          children: [
-                            SizedBox(
-                              height: 25,
-                            ),
-                            const Text("Enter the code to join the classroom"),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            // passcode field
-                            new TextFormField(
-                              onSaved: (input) =>
-                                  requestModel.classCode = input,
-                              validator: (input) => input.length != 8
-                                  ? "Code must be 8 characters long."
-                                  : null,
-                              decoration: new InputDecoration(
-                                  prefixIcon: Icon(Icons.vpn_key)),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            // button
-                            Material(
-                              elevation: 5.0,
-                              // borderRadius: BorderRadius.circular(20),
-                              color: Colors.blue[700],
-                              child: MaterialButton(
-                                minWidth: MediaQuery.of(context)
-                                    .size
-                                    .width/2, //sets minimum width as of size of screen
-                                // padding: EdgeInsets.all(20),
-                                onPressed: () {
-                                  // call the ogin api if credential is valid
-                                  if (validateAndSave()) {
-                                    apiService
-                                        .joinClassroom(requestModel)
-                                        .then((value) {
-                                      // send user to specific home page based on role
-                                      return directToHome();
-                                    });
-                                  } else {
-                                    throw Exception("Validation Failed.");
-                                  }
-                                },
-                                child: Text("Join Classroom",
-                                style: TextStyle(color: Colors.white70),
+                              children: [
+                                SizedBox(
+                                  height: 25,
                                 ),
-                              ),
-                            ),
-                          ],
-                        ))
+                                const Text(
+                                    "Enter the code to join the classroom"),
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                // passcode field
+                                new TextFormField(
+                                  controller: classCodeController,
+                                  onSaved: (input) =>
+                                      requestModel.classCode = input,
+                                  validator: (input) => input.length != 8
+                                      ? "Code must be 8 characters long."
+                                      : null,
+                                  decoration: new InputDecoration(
+                                      prefixIcon: Icon(Icons.vpn_key)),
+                                ),
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                // button
+                                Material(
+                                  elevation: 5.0,
+                                  // borderRadius: BorderRadius.circular(20),
+                                  color: Colors.blue[700],
+                                  child: MaterialButton(
+                                    minWidth: MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                        2, //sets minimum width as of size of screen
+                                    // padding: EdgeInsets.all(20),
+                                    onPressed: () {
+                                      // call the ogin api if credential is valid
+                                      if (validateAndSave()) {
+                                        apiService
+                                            .joinClassroom(requestModel)
+                                            .then((value) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                            content: Text( 
+                                                "Successfully Joined the classroom"),
+                                            dismissDirection:
+                                                DismissDirection.up,
+                                          ));
+                                          // send user to specific home page based on role
+                                          return directToHome();
+                                        });
+                                      } else {
+                                        throw Exception("Validation Failed.");
+                                      }
+                                      classCodeController.clear();
+                                    },
+                                    child: Text(
+                                      "Join Classroom",
+                                      style: TextStyle(color: Colors.white70),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ))
                       ],
                     ),
                   ));

@@ -59,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             expandedHeight: 250,
             floating: true,
             stretch: true,
+            onStretchTrigger: refreshHome(),
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
@@ -77,5 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  refreshHome() {
+    // call the API to fetch the data
   }
 }

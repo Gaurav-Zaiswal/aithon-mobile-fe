@@ -13,10 +13,8 @@ import 'detail_page_drawer_t.dart';
 
 // classroom detail screen for teacher
 class ClassDetailsStudent extends StatefulWidget {
-
   @override
-  _ClassDetailsStudentState createState() =>
-      _ClassDetailsStudentState();
+  _ClassDetailsStudentState createState() => _ClassDetailsStudentState();
   // _ClassDetailsStudentState(id);
 }
 
@@ -26,34 +24,22 @@ class _ClassDetailsStudentState extends State<ClassDetailsStudent> {
   int classroomId = int.parse(Get.parameters["id"]);
 
   _ClassDetailsStudentState() {
+    // print("4444444444444444444444444444444444444444444444444444444444444");
     feedController = Get.put(FeedListController(classroomId));
   }
 
   @override
   Widget build(BuildContext context) {
-    // render a list of feeds that are posted in that class by teacher
-
-    return Scaffold(
-      appBar: AppBar(
-          // title: Text(classId),
-          title: Text("Class Detail")
-        ),
-      drawer: DetailPageDrawerTeacher(),
-      
-      body: Center(
-        // child: TextFieldForFeed(classRoomId: this.classroomId),
-        child: buildFeeds(),
-      ),
-    );
-  }
-
-  buildFeeds() {
-    // returns feedbox
-    SliverToBoxAdapter(child: Obx(
+    Widget buildFeeds() => SliverToBoxAdapter(child: Obx(
       () {
-        if (feedController.isLoading.value)
+        // print( "---------------------------> ${feedController.feedList.length}");
+
+        if (feedController.isLoading.value) {
+          // print("---> inside else block of buldFeeds() _ClassDetailsStudentState");
+
           return Center(child: CircularProgressIndicator());
-        else
+        } else {
+          // print("--> inside else block of buldFeeds() _ClassDetailsStudentState");
           return ListView.builder(
               itemCount: feedController.feedList.length,
               primary: false,
@@ -63,7 +49,26 @@ class _ClassDetailsStudentState extends State<ClassDetailsStudent> {
                   feed: feedController.feedList[index],
                 );
               });
+        }
       },
     ));
+    // render a list of feeds that are posted in that class by teacher
+    print(
+        "---------------------------- inside buld method of _ClassDetailsStudentState");
+    return Scaffold(
+      appBar: AppBar(
+          // title: Text(classId),
+          title: Text("Class Detail")),
+      drawer: DetailPageDrawerTeacher(),
+      body: CustomScrollView(
+        slivers: [
+          buildFeeds()
+        ],
+      ),
+      // body: Center(
+      //   // child: TextFieldForFeed(classRoomId: this.classroomId),
+      //   child: buildFeeds(),
+      // ),
+    );
   }
 }

@@ -6,33 +6,49 @@ import 'package:scoreapp/models/feed_list_model.dart';
 
 class FeedBox extends StatelessWidget {
   FeedBox({@required this.feed});
-  final ClassroomFeedListModel feed; 
+  final ClassroomFeedListModel feed;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Color(0xFF150259),
-        child: Column( 
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [Icon(Icons.class_)],
-            ),
-            SizedBox(height: 10),
-            ListTile(
-              leading: Icon(Icons.class_),
-              title: Text(
-                feed.feedDescription,
-                style: TextStyle(color: Colors.white70),
+    if (feed.feedDescription == null) 
+      return ListTile(
+        // tileColor: Colors.grey[600],
+          leading: Icon(Icons.info),
+          title: Text(
+            "Feed description here",
+            style: TextStyle(color: Colors.blue[700]),
+          ),
+          dense: false,
+          subtitle: Row(
+            children: [
+              Text(
+                feed.postedBy.user.firstName,
               ),
-              dense: false,
-              subtitle: Text(
-                feed.postedBy.toString(),
+              Text(
+                feed.postedBy.user.lastName,
               ),
-            ),
-          ],
-        ),    
-    );
+              Text(feed.postedOn.toIso8601String())
+            ],
+          ));
+     else
+      return ListTile(
+        // tileColor: Colors.grey[600],
+          leading: Icon(Icons.info),
+          title: Text(
+            feed.feedDescription,
+            style: TextStyle(color: Colors.blue[700]),
+          ),
+          dense: false,
+          subtitle: Row(
+            children: [
+              Text(
+                feed.postedBy.user.firstName,
+              ),
+              Text(
+                feed.postedBy.user.lastName,
+              ),
+            ],
+          ));
+    
   }
 }

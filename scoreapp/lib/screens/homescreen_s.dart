@@ -71,6 +71,9 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
             expandedHeight: 250,
             floating: true,
             stretch: true,
+            // onStretchTrigger: () {
+            //   // return buildClasses();
+            // },
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
@@ -78,7 +81,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                 fit: BoxFit.cover,
               ),
               stretchModes: [
-                StretchMode.fadeTitle,
+                StretchMode.zoomBackground,
               ],
               centerTitle: true,
             ),
@@ -89,5 +92,10 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         ],
       ),
     );
+  }
+
+  refreshScreen() {
+    // add classes grid here
+    // buildClasses()
   }
 }
