@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.scoreapp">
+    package="com.example.scoreapp"
+    xmlns:tools="http://schemas.android.com/tools">  <!-- Added this -->
+    
+  <!-- Added 'tools:replace="android:label"' as well below -inside application -->
    <application
+        tools:replace="android:label"
         android:label="scoreapp"
         android:icon="@mipmap/ic_launcher">
         <activity

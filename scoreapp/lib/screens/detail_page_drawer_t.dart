@@ -38,16 +38,16 @@ class DetailPageDrawerTeacher extends StatelessWidget {
               ),
             ),
           ),
-          // ListTile(
-          //   leading: Icon(Icons.vpn_key),
-          //   title: Text(
-          //     'QsH56t',
-          //     style: TextStyle(
-          //       fontSize: 18,
-          //     ),
-          //   ),
-          //   onTap: null,
-          // ),
+          ListTile(
+            leading: Icon(Icons.vpn_key),
+            title: Text(
+              'QsH56t',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            onTap: null,
+          ),
           ListTile(
             leading: Icon(Icons.home),
             title: Text(
@@ -61,7 +61,17 @@ class DetailPageDrawerTeacher extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.create),
             title: Text(
-              'Create Assignment',
+              'Create Assignments',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            onTap: null,
+          ),
+          ListTile(
+            leading: Icon(Icons.create),
+            title: Text(
+              'Classroom',
               style: TextStyle(
                 fontSize: 18,
               ),

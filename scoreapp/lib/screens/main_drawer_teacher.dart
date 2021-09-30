@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/utils/secure_storage.dart';
 
-
-class MainDrawerTeacher extends StatelessWidget 
-{
+class MainDrawerTeacher extends StatelessWidget {
   // const MainDrawerTeacher({ Key? key }) : super(key: key);
   APIService _apiService = APIService();
   @override
@@ -53,6 +51,18 @@ class MainDrawerTeacher extends StatelessWidget
             },
           ),
           ListTile(
+            leading: Icon(Icons.class_),
+            title: Text(
+              'Classroom', // video calling
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            onTap: () {
+              Get.toNamed("/classroom");
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.add),
             title: Text(
               'Join a class',
@@ -72,7 +82,7 @@ class MainDrawerTeacher extends StatelessWidget
             ),
             onTap: () {
               UserSecureStorage.removeUserToken("token");
-              // remove data preferences stored 
+              // remove data preferences stored
               _apiService.removeUserDetails();
               Get.offAllNamed("/splash");
             },

@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/controllers/classroom_controller.dart';
+import 'package:scoreapp/models/classroon_join_model.dart';
 import 'package:scoreapp/screens/main_drawer_teacher.dart';
 import 'dart:ui' as ui;
 import 'package:scoreapp/utils/HeaderFooter.dart';
+import 'package:scoreapp/widgets/bottomsheet_widget_s.dart';
+import 'package:scoreapp/widgets/class_widget_s.dart';
 import 'package:scoreapp/widgets/class_widget_t.dart';
 import 'createclass.dart';
 
 // homepage for teacher
-class HomeScreen extends StatefulWidget {
+class HomeScreenStudent extends StatefulWidget {
   // final String username;
-  // const HomeScreen(this.username);
+  // const HomeScreenStudent(this.username);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenStudentState createState() => _HomeScreenStudentState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenStudentState extends State<HomeScreenStudent> {
   // instantiating classroom controller
   final ClassroomController classroomController =
       Get.put(ClassroomController());
@@ -37,9 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   primary: false,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext ctx, index) {
-                    return ClassBox(data: classroomController.classroomList[index],);
+                    return ClassBoxStudent(
+                      data: classroomController.classroomList[index],
+                    );
                     // return ClassBox("gaurav jaiswal 1234");
-                  
                   });
           },
         ));
@@ -49,6 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
       //   title: Text('Class Joined'),
       // ),
       drawer: MainDrawerTeacher(),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: poupJoin(context),
+      //   label: Text("Join"),
+      //   splashColor: Colors.grey[400],
+      // ),
+      floatingActionButton: MyFloatingActionButton(),
+
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

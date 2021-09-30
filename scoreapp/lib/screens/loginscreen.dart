@@ -227,9 +227,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (prefs.getBool('isTeacher') && !prefs.getBool('isStudent')) {
-        Get.offAllNamed("/HomeScreen", arguments: "Teacher's homepage");
+        Get.offAllNamed("/home-teacher");
       } else if (prefs.getBool('isStudent') && !prefs.getBool('isTeacher')) {
-        Get.offAllNamed("/HomeScreen", arguments: "students homepage");
+        Get.offAllNamed("/home-student");
       }
     }else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

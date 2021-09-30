@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:scoreapp/models/classroon_join_model.dart';
 import 'package:scoreapp/models/create_feed_model.dart';
 import 'package:scoreapp/models/create_classroom_model.dart';
 import 'package:scoreapp/models/feed_list_model.dart';
@@ -251,4 +252,39 @@ class APIService {
       throw Exception('Failed to load the Data!');
     }
   }
+
+Future<ClassroomJoinModel> joinClassroom(ClassroomJoinModel requestModel) async {
+    // let studetns join the classroom via a 8 characterslong code
+
+    String url =
+        "https://gauravjaiswal.pythonanywhere.com/class/api/join/";
+    var token = await UserSecureStorage.getUserToken();
+    print(requestModel.toJson());
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'authorization': 'token $token'
+    };
+    final body = jsonEncode(requestModel.toJson());
+
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400) {
+      var jsonString = response.body;
+      return classroomJoinModelFromJson(jsonString);
+    } else if (response.statusCode == 403) {
+      throw Exception('forbidden: You do not have permission to join the classroom');
+    } else {
+      // print(token);
+      // print(response.statusCode);
+      throw Exception("Failed to join the classroom");
+    }
+  }
+
 }
