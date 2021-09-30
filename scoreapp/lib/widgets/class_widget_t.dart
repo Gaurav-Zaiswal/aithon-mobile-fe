@@ -29,7 +29,7 @@ class ClassBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0xFF150259),
+      color: Colors.grey[600],
       child: InkWell(
         splashColor: Colors.grey.withAlpha(100),
         onTap: () {
@@ -38,7 +38,7 @@ class ClassBox extends StatelessWidget {
             '/view-class-teacher/${data.id}',
           );
         },
-        child: Column( 
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Row(
@@ -55,6 +55,19 @@ class ClassBox extends StatelessWidget {
               dense: false,
               subtitle: Text(
                 data.classDescription,
+              ),
+            ),
+            SizedBox(height: 25),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal:20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Code: ",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(data.classCode),
+                ],
               ),
             ),
           ],

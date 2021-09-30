@@ -193,7 +193,8 @@ class APIService {
     }
   }
 
-  Future<CreateFeedModel> postFeed(CreateFeedModel requestModel, String id) async {
+  Future<CreateFeedModel> postFeed(
+      CreateFeedModel requestModel, String id) async {
     // create feed for classroom
 
     String url =
@@ -233,7 +234,8 @@ class APIService {
 
     // final storage = new FlutterSecureStorage();
 
-    String url = "https://gauravjaiswal.pythonanywhere.com/feed/api/$classId/list/";
+    String url =
+        "https://gauravjaiswal.pythonanywhere.com/feed/api/$classId/list/";
     var token = await UserSecureStorage.getUserToken();
     final response = await http.get(
       Uri.parse(url),
@@ -253,11 +255,11 @@ class APIService {
     }
   }
 
-Future<ClassroomJoinModel> joinClassroom(ClassroomJoinModel requestModel) async {
+  Future<ClassroomJoinModel> joinClassroom(
+      ClassroomJoinModel requestModel) async {
     // let studetns join the classroom via a 8 characterslong code
 
-    String url =
-        "https://gauravjaiswal.pythonanywhere.com/class/api/join/";
+    String url = "https://gauravjaiswal.pythonanywhere.com/class/api/join/";
     var token = await UserSecureStorage.getUserToken();
     print(requestModel.toJson());
 
@@ -279,12 +281,13 @@ Future<ClassroomJoinModel> joinClassroom(ClassroomJoinModel requestModel) async 
       var jsonString = response.body;
       return classroomJoinModelFromJson(jsonString);
     } else if (response.statusCode == 403) {
-      throw Exception('forbidden: You do not have permission to join the classroom');
+      throw Exception(
+          'forbidden: You do not have permission to join the classroom');
     } else {
       // print(token);
-      // print(response.statusCode);
+      print(
+          "-------------------------------------------------------->>>>>>>>> ${response.statusCode}");
       throw Exception("Failed to join the classroom");
     }
   }
-
 }
