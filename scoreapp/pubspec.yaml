@@ -33,6 +33,7 @@ dependencies:
   jitsi_meet: ^4.0.0
   flutter_gradient_colors: ^2.1.1
   pin_code_fields:
+  intl: ^0.17.0
   
 
 dev_dependencies:

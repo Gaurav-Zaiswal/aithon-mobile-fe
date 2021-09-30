@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 // import 'package:get/get.dart';
 // import 'package:scoreapp/controllers/classroom_controller.dart';
 import 'package:scoreapp/models/feed_list_model.dart';
@@ -10,9 +11,10 @@ class FeedBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (feed.feedDescription == null) 
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm");
+    if (feed.feedDescription == null)
       return ListTile(
-        // tileColor: Colors.grey[600],
+          // tileColor: Colors.grey[600],
           leading: Icon(Icons.info),
           title: Text(
             "Feed description here",
@@ -24,15 +26,21 @@ class FeedBox extends StatelessWidget {
               Text(
                 feed.postedBy.user.firstName,
               ),
+              SizedBox(
+                width: 5,
+              ),
               Text(
                 feed.postedBy.user.lastName,
               ),
-              Text(feed.postedOn.toIso8601String())
+              SizedBox(
+                width: 10,
+              ),
+              Text(dateFormat.format(feed.postedOn)),
             ],
           ));
-     else
+    else
       return ListTile(
-        // tileColor: Colors.grey[600],
+          // tileColor: Colors.grey[600],
           leading: Icon(Icons.info),
           title: Text(
             feed.feedDescription,
@@ -44,11 +52,17 @@ class FeedBox extends StatelessWidget {
               Text(
                 feed.postedBy.user.firstName,
               ),
+              SizedBox(
+                width: 5,
+              ),
               Text(
                 feed.postedBy.user.lastName,
               ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(dateFormat.format(feed.postedOn)),
             ],
           ));
-    
   }
 }
