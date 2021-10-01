@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:scoreapp/models/assignment_creation_model.dart';
 import 'package:scoreapp/models/classroon_join_model.dart';
 import 'package:scoreapp/models/create_feed_model.dart';
 import 'package:scoreapp/models/create_classroom_model.dart';
@@ -12,6 +13,7 @@ import 'package:scoreapp/models/login_model.dart';
 import 'package:scoreapp/models/register_student_model.dart';
 import 'package:scoreapp/models/register_teacher_model.dart';
 import 'package:scoreapp/models/user_model.dart';
+import 'package:scoreapp/screens/create_assignment_t.dart';
 import 'package:scoreapp/utils/secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -86,9 +88,9 @@ class APIService {
   }
 
   Future<RegisterTeacherResponseModel> registerTeacher(
-      // endpoint that lets any anonymous user to register as teacher
-
       RegisterTeacherRequestModel requestModel) async {
+    // endpoint that lets any anonymous user to register as teacher
+
     // String url = "https://reqres.in/api/register/";
     String url =
         "https://gauravjaiswal.pythonanywhere.com/users/api/teacher-register/";
@@ -110,9 +112,9 @@ class APIService {
   }
 
   Future<RegisterStudentResponseModel> registerStudent(
-      // endpoint that lets any anonymous user to register as student
-
       RegisterStudentRequestModel requestModel) async {
+    // endpoint that lets any anonymous user to register as student
+
     // String url = "https://reqres.in/api/register/";
     String url =
         "https://gauravjaiswal.pythonanywhere.com/users/api/student-register/";
@@ -288,6 +290,45 @@ class APIService {
       print(
           "-------------------------------------------------------->>>>>>>>> ${response.statusCode}");
       throw Exception("Failed to join the classroom");
+    }
+  }
+
+  Future<AssignmentCreationModel> createAssignment(
+      AssignmentCreationModel requestModel, String classId) async {
+    // get list of enrolled classroom of either teacher or student
+    // show them on homescreen
+
+    // final storage = new FlutterSecureStorage();
+
+    String url =
+        "https://gauravjaiswal.pythonanywhere.com/assignment-api/class/$classId/create";
+    var token = await UserSecureStorage.getUserToken();
+    // print("--------------hvjhvjhvjhv-------> ${requestModel.toJson()}");
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'authorization': 'token $token'
+    };
+    final body = jsonEncode(requestModel.toJson());
+
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400) {
+      var jsonString = response.body;
+      return assignmentCreationModelFromJson(jsonString);
+    } else if (response.statusCode == 403) {
+      throw Exception(
+          'forbidden: You do not have permission to create assignment');
+    } else {
+      // print(token);
+      print(response.statusCode);
+      throw Exception("Failed to create the assignment");
     }
   }
 }

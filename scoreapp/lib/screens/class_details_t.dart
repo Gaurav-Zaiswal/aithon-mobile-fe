@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scoreapp/controllers/feedlistview_controller.dart';
+import 'package:scoreapp/widgets/bootomsheet_widget_assignment_post.dart';
 import 'package:scoreapp/widgets/bottomnavigation_widget_t.dart';
 import 'package:scoreapp/widgets/feed_widget.dart';
 // import 'package:scoreapp/screens/main_drawer_teacher.dart';
@@ -14,10 +15,8 @@ import 'detail_page_drawer_t.dart';
 
 // classroom detail screen for teacher
 class ClassDetailsTeacher extends StatefulWidget {
-
   @override
-  _ClassDetailsTeacherState createState() =>
-      _ClassDetailsTeacherState();
+  _ClassDetailsTeacherState createState() => _ClassDetailsTeacherState();
   // _ClassDetailsTeacherState(id);
 }
 
@@ -60,10 +59,10 @@ class _ClassDetailsTeacherState extends State<ClassDetailsTeacher> {
     return Scaffold(
       appBar: AppBar(
           // title: Text(classId),
-          title: Text("Class Detail")
-        ),
+          title: Text("Class Detail")),
       // drawer: DetailPageDrawerTeacher(),
       // bottomNavigationBar: MyBottomNavigationT(),
+      floatingActionButton: AssignmentFloatingActionButton(classroomId),
       body: Center(
         child: TextFieldForFeed(classRoomId: this.classroomId),
         // child: hasTeacherRole

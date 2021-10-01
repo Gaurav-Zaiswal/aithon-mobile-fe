@@ -53,8 +53,7 @@ class _ClassDetailsStudentState extends State<ClassDetailsStudent> {
       },
     ));
     // render a list of feeds that are posted in that class by teacher
-    print(
-        "---------------------------- inside buld method of _ClassDetailsStudentState");
+    // print("------------ inside buld method of _ClassDetailsStudentState");
     return Scaffold(
       appBar: AppBar(
           // title: Text(classId),
