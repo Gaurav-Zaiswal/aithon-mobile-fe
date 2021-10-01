@@ -59,6 +59,10 @@ class _ClassDetailsStudentState extends State<ClassDetailsStudent> {
           // title: Text(classId),
           title: Text("Class Detail")),
       drawer: DetailPageDrawerTeacher(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed("/list-assignment/$classroomId"),
+        child: Icon(Icons.assignment),
+      ),
       body: CustomScrollView(
         slivers: [
           buildFeeds()
