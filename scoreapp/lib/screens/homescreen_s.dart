@@ -61,41 +61,62 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
       // ),
       floatingActionButton: MyFloatingActionButton(),
 
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Text('Joined Classes'),
-            // title: Text(username),
+      body: 
+        // onRefresh: () {},
+        CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Text('Joined Classes'),
+              // title: Text(username),
 
-            backgroundColor: Theme.of(context).primaryColor,
-            expandedHeight: 250,
-            floating: true,
-            stretch: true,
-            // onStretchTrigger: () {
-            //   // return buildClasses();
-            // },
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1104&q=80',
-                fit: BoxFit.cover,
+              backgroundColor: Theme.of(context).primaryColor,
+              expandedHeight: 250,
+              floating: true,
+              // stretch: true,
+              onStretchTrigger: _refreshHome,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.network(
+                  'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1104&q=80',
+                  fit: BoxFit.cover,
+                ),
+                stretchModes: [
+                  StretchMode.zoomBackground,
+                ],
+                centerTitle: true,
               ),
-              stretchModes: [
-                StretchMode.zoomBackground,
-              ],
-              centerTitle: true,
             ),
-          ),
 
-          // add classes grid here
-          buildClasses(),
-        ],
+            // add classes grid here
+            buildClasses(),
+          ],
+        
       ),
     );
   }
 
-  refreshScreen() {
-    // add classes grid here
-    // buildClasses()
+  Future<void> _refreshHome() {
+    // call the API
+    SliverToBoxAdapter(child: Obx(
+          () {
+            if (classroomController.isLoading.value)
+              return Center(child: CircularProgressIndicator());
+            else
+              return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  itemCount: classroomController.classroomList.length,
+                  primary: false,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext ctx, index) {
+                    return ClassBoxStudent(
+                      data: classroomController.classroomList[index],
+                    );
+                    // return ClassBox("gaurav jaiswal 1234");
+                  });
+          },
+        ));
   }
 }

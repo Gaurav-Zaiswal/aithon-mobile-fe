@@ -161,7 +161,7 @@ class _AssignmentFloatingActionButtonState
                                       if (validateAndSave()) {
                                         apiService
                                             .createAssignment(requestModel,
-                                                classId.toString())
+                                                classId)
                                             .then((value) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(

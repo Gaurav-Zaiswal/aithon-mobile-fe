@@ -295,7 +295,7 @@ class APIService {
   }
 
   Future<AssignmentCreationModel> createAssignment(
-      AssignmentCreationModel requestModel, String classId) async {
+      AssignmentCreationModel requestModel, int classId) async {
     // get list of enrolled classroom of either teacher or student
     // show them on homescreen
 
@@ -333,14 +333,14 @@ class APIService {
     }
   }
 
-static Future<List<AssignmentListingModel>> getAssignmentsList(String classId) async {
+static Future<List<AssignmentListingModel>> getAssignmentsList(int classId) async {
     // get list of enrolled classroom of either teacher or student
     // show them on homescreen
 
     // final storage = new FlutterSecureStorage();
 
     String url =
-        "https://gauravjaiswal.pythonanywhere.com/assignment-api/class/3/list";
+        "https://gauravjaiswal.pythonanywhere.com/assignment-api/class/$classId/list";
     var token = await UserSecureStorage.getUserToken();
     final response = await http.get(
       Uri.parse(url),
@@ -353,7 +353,7 @@ static Future<List<AssignmentListingModel>> getAssignmentsList(String classId) a
         response.statusCode == 201 ||
         response.statusCode == 400) {
       var jsonString = response.body;
-      return getAssignmentsList(jsonString);
+      return assignmentListingModelFromJson(jsonString);
     } else {
       print("--------------->>>>>>>>>>>> ${response.statusCode}");
       throw Exception('Failed to load the Data!');

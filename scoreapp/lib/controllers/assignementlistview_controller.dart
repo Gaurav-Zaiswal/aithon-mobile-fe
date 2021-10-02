@@ -1,8 +1,8 @@
 import 'package:get/state_manager.dart';
 import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/models/assignment_list_view_model.dart';
-import 'package:scoreapp/models/feed_list_model.dart';
-import 'package:scoreapp/models/home_screen_model.dart';
+// import 'package:scoreapp/models/feed_list_model.dart';
+// import 'package:scoreapp/models/home_screen_model.dart';
 
 class AssignmentListController extends GetxController {
   int classId;
@@ -25,7 +25,7 @@ class AssignmentListController extends GetxController {
 
     isLoading(true);
     try {
-      var assignments = await APIService.getAssignmentsList(classId.toString());
+      var assignments = await APIService.getAssignmentsList(classId);
       if (assignments != null) {
         for (int i = 0; i < assignments.length; i++) {
           assignmentList.add(assignments[i]);
