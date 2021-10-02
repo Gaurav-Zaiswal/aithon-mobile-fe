@@ -355,7 +355,7 @@ static Future<List<AssignmentListingModel>> getAssignmentsList(int classId) asyn
       var jsonString = response.body;
       return assignmentListingModelFromJson(jsonString);
     } else {
-      print("--------------->>>>>>>>>>>> ${response.statusCode}");
+      // print("--------------->>>>>>>>>>>> ${response.statusCode}");
       throw Exception('Failed to load the Data!');
     }
   }

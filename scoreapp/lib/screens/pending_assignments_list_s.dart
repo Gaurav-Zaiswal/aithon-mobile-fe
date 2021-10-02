@@ -53,10 +53,14 @@ class _AssignmentListStudentState extends State<AssignmentListStudent> {
       appBar: AppBar(
           title: Text("Pending Assignments")),
       drawer: DetailPageDrawerTeacher(),
-      body: CustomScrollView(
-        slivers: [
-          buildAssignments()
-        ],
+      body: Container(
+      color: Colors.grey[200],
+
+        child: CustomScrollView(
+          slivers: [
+            buildAssignments()
+          ],
+        ),
       ),
     );
   }

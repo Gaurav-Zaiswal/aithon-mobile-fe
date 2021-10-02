@@ -13,22 +13,28 @@ class AssignmentBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm");
-    return ListTile(
-        // tileColor: Colors.grey[600],
-        leading: Icon(Icons.info),
-        title: Text(
-          assignment.title,
-          style: TextStyle(color: Colors.blue[700]),
-        ),
-        dense: false,
-        subtitle: Row(
-          children: [
-            Text("deadline: "),
-            SizedBox(
-              width: 5,
-            ),
-            Text(dateFormat.format(assignment.deadline)),
-          ],
-        ));
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: 0,
+        vertical: 20
+      ),
+      child: ListTile(
+          // tileColor: Colors.grey[200],
+          leading: Icon(Icons.pending),
+          title: Text(
+            assignment.title,
+            style: TextStyle(color: Colors.blue[700]),
+          ),
+          dense: false,
+          subtitle: Row(
+            children: [
+              Text("deadline: "),
+              SizedBox(
+                width: 5,
+              ),
+              Text(dateFormat.format(assignment.deadline)),
+            ],
+          )),
+    );
   }
 }
