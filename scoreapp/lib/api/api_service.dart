@@ -107,7 +107,7 @@ class APIService {
       // invalid username pwd will have 400
       return RegisterTeacherResponseModel.fromJson(json.decode(response.body));
     } else {
-      // print(response.statusCode);
+      print(response.statusCode);
       throw Exception('Failed to load the Data!');
     }
   }
