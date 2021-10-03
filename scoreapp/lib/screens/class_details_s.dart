@@ -48,7 +48,7 @@ class _ClassDetailsStudentState extends State<ClassDetailsStudent> {
     return Scaffold(
       appBar: AppBar(
           // title: Text(classId),
-          title: Text("Class Detail")),
+          title: Text("Class Feeds")),
       drawer: DetailPageDrawerTeacher(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed("/list-assignment/$classroomId"),

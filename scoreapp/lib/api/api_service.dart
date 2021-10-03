@@ -129,6 +129,7 @@ class APIService {
       // invalid username pwd will have 400
       return RegisterStudentResponseModel.fromJson(json.decode(response.body));
     } else {
+      print("----------------------------------> ${response.statusCode}");
       throw Exception('Failed to load the Data!');
     }
   }
@@ -333,7 +334,8 @@ class APIService {
     }
   }
 
-static Future<List<AssignmentListingModel>> getAssignmentsList(int classId) async {
+  static Future<List<AssignmentListingModel>> getAssignmentsList(
+      int classId) async {
     // get list of enrolled classroom of either teacher or student
     // show them on homescreen
 

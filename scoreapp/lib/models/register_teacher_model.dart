@@ -1,12 +1,15 @@
 class RegisterTeacherResponseModel {
-  final String token, error;
+  final String username, email, firstName, lastName;
 
-  RegisterTeacherResponseModel({this.token, this.error});
+  RegisterTeacherResponseModel(
+      {this.username, this.email, this.firstName, this.lastName});
 
   factory RegisterTeacherResponseModel.fromJson(Map<String, dynamic> json) {
     return RegisterTeacherResponseModel(
-        token: json["token"] != null ? json["token"] : "",
-        error: json["error"] != null ? json["error"] : "");
+        username: json["username"] != null ? json["username"] : "",
+        email: json["email"] != null ? json["email"] : "",
+        firstName: json["first_name"] != null ? json["first_name"] : "",
+        lastName: json["last_name"] != null ? json["last_name"] : "");
   }
 }
 

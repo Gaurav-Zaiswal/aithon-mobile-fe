@@ -25,6 +25,7 @@ class _StudentRegistrationState extends State<StudentRegistration> {
   bool _hideCPassword = true;
 
   RegisterStudentRequestModel requestModel;
+  APIService apiService = new APIService();
 
   @override
   void initState() {
@@ -199,18 +200,18 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                                   // call the api if form is valid
                                   if (validateAndSave()) {
                                     print(requestModel.toJson());
-                                    APIService apiService = new APIService();
+                                    // APIService apiService = new APIService();
                                     apiService
                                         .registerStudent(requestModel)
                                         .then((value) {
                                       if (value.token.isEmpty) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
-                                          content: Text(value.error),
+                                          content: Text(value.token),
                                         ));
                                       } else {
                                         // print(requestModel.toJson());
-                                        Navigator.pushNamed(context, "/login");    
+                                        Navigator.pushNamed(context, "/login");
                                       }
                                     });
                                   } else {
