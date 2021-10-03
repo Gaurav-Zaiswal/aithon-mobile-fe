@@ -83,20 +83,22 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                                         apiService
                                             .joinClassroom(requestModel)
                                             .then((value) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                            content: Text( 
-                                                "Successfully Joined the classroom"),
-                                            dismissDirection:
-                                                DismissDirection.up,
-                                          ));
-                                          // send user to specific home page based on role
-                                          return directToHome();
+                                          classCodeController.clear();
+                                          Get.offAllNamed("/home-student");
+
+                                          // ScaffoldMessenger.of(context)
+                                          //     .showSnackBar(SnackBar(
+                                          //   content: Text(
+                                          //       "Successfully Joined the classroom"),
+                                          //   dismissDirection:
+                                          //       DismissDirection.up,
+                                          // ));
+                                          // // send user to specific home page based on role
+                                          // return directToHome();
                                         });
                                       } else {
                                         throw Exception("Validation Failed.");
                                       }
-                                      classCodeController.clear();
                                     },
                                     child: Text(
                                       "Join Classroom",
@@ -122,7 +124,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
     }
   }
 
-  directToHome() {
-    Get.offAll("/home-student");
-  }
+  // directToHome() {
+  //   Get.offAll("/home-student");
+  // }
 }
