@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -6,19 +8,20 @@ import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/models/assignment_creation_model.dart';
 
 class AssignmentFloatingActionButton extends StatefulWidget {
-  // const AssignmentFloatingActionButton({ Key? key }) : super(key: key);
   final int classId;
-  const AssignmentFloatingActionButton(this.classId);
+  const AssignmentFloatingActionButton({Key key, @required this.classId})
+      : super(key: key);
+  // AssignmentFloatingActionButton({@required this.classId});
 
   @override
   _AssignmentFloatingActionButtonState createState() =>
-      _AssignmentFloatingActionButtonState(classId);
+      _AssignmentFloatingActionButtonState(classroomId: this.classId);
 }
 
 class _AssignmentFloatingActionButtonState
     extends State<AssignmentFloatingActionButton> {
-  int classId;
-  _AssignmentFloatingActionButtonState(classId);
+  int classroomId;
+  _AssignmentFloatingActionButtonState({this.classroomId});
   final format = DateFormat("yyyy-MM-dd HH:mm");
 
   APIService apiService = new APIService();
@@ -113,7 +116,8 @@ class _AssignmentFloatingActionButtonState
                                 // datetime for submission deadline
                                 DateTimeField(
                                   format: format,
-                                  onSaved: (input) => requestModel.deadline=input,
+                                  onSaved: (input) =>
+                                      requestModel.deadline = input,
                                   // validator: validateDeadline,
                                   validator: (input) =>
                                       input.difference(_now).inMinutes < 0
@@ -160,21 +164,21 @@ class _AssignmentFloatingActionButtonState
                                       // call the api if credential is valid
                                       if (validateAndSave()) {
                                         apiService
-                                            .createAssignment(requestModel,
-                                                classId)
+                                            .createAssignment(
+                                                requestModel, classroomId)
                                             .then((value) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                            content: Text(
-                                                "Assignment has been created successfully"),
-                                            dismissDirection:
-                                                DismissDirection.up,
-                                          ));
                                           // send user to teachers details page
+                                          classCodeController.clear();
                                           return Get.toNamed(
                                               "/class-detail-teacher");
                                         });
                                       } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text(
+                                              "Please make sure you have filled the form correctly"),
+                                          dismissDirection: DismissDirection.up,
+                                        ));
                                         throw Exception("Validation Failed.");
                                       }
                                       classCodeController.clear();
@@ -196,6 +200,8 @@ class _AssignmentFloatingActionButtonState
   String _validatePoints(String input) {
     if (int.parse(input) <= 0)
       return "Points must be greater than zero";
+    else if (input == "")
+      return "You must grade the assignment";
     else
       return null;
   }
@@ -203,7 +209,12 @@ class _AssignmentFloatingActionButtonState
   String validateDeadline(DateTime value) {
     DateTime _now = DateTime.now();
     final datetimeDiff = value.difference(_now).inSeconds;
-    if (datetimeDiff <= 0) return "Deadline must be in future";
+    if (datetimeDiff <= 0)
+      return "Deadline must be in future";
+    else if (value == null)
+      return "you must specify the deadline";
+    else
+      return null;
   }
 
   bool validateAndSave() {

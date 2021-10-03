@@ -301,6 +301,7 @@ class APIService {
     // show them on homescreen
 
     // final storage = new FlutterSecureStorage();
+    print("-------------- clas id---------------------->>>>>>>>> $classId");
 
     String url =
         "https://gauravjaiswal.pythonanywhere.com/assignment-api/class/$classId/create";

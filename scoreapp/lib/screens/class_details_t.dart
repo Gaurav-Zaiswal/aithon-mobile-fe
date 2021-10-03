@@ -62,7 +62,7 @@ class _ClassDetailsTeacherState extends State<ClassDetailsTeacher> {
           title: Text("Class Detail")),
       // drawer: DetailPageDrawerTeacher(),
       // bottomNavigationBar: MyBottomNavigationT(),
-      floatingActionButton: AssignmentFloatingActionButton(classroomId),
+      floatingActionButton: AssignmentFloatingActionButton(classId:classroomId),
       body: Center(
         child: TextFieldForFeed(classRoomId: this.classroomId),
         // child: hasTeacherRole
