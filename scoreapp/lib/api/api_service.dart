@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:scoreapp/models/assignment_creation_model.dart';
 import 'package:scoreapp/models/assignment_list_view_model.dart';
+import 'package:scoreapp/models/assignment_submission_model.dart';
 import 'package:scoreapp/models/classroon_join_model.dart';
 import 'package:scoreapp/models/create_feed_model.dart';
 import 'package:scoreapp/models/create_classroom_model.dart';
@@ -301,7 +302,7 @@ class APIService {
     // show them on homescreen
 
     // final storage = new FlutterSecureStorage();
-    print("-------------- clas id---------------------->>>>>>>>> $classId");
+    // print("-------------- clas id---------------------->>>>>>>>> $classId");
 
     String url =
         "https://gauravjaiswal.pythonanywhere.com/assignment-api/class/$classId/create";
@@ -360,6 +361,42 @@ class APIService {
     } else {
       // print("--------------->>>>>>>>>>>> ${response.statusCode}");
       throw Exception('Failed to load the Data!');
+    }
+  }
+
+  Future<AssignmentSubmissionModel> submitAssignment(
+      AssignmentSubmissionModel requestModel, int classId) async {
+    // create feed for classroom
+    print("-----------------------> $classId");
+    String url =
+        "https://gauravjaiswal.pythonanywhere.com/assignment-api/$classId/submit";
+    var token = await UserSecureStorage.getUserToken();
+    // print(requestModel.toJson());
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'authorization': 'token $token'
+    };
+    final body = jsonEncode(requestModel.toJson());
+
+    final response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400) {
+      var jsonString = response.body;
+      return assignmentSubmissionModelFromJson(jsonString);
+    } else if (response.statusCode == 403) {
+      throw Exception(
+          'forbidden: You do not have permission to submit the assignment');
+    } else {
+      // print(token);
+      print(response.statusCode);
+      throw Exception("Failed to submit the assignment");
     }
   }
 }

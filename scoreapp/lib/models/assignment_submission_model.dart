@@ -1,38 +1,30 @@
 // To parse this JSON data, do
 //
-//     final AssignmentCreationModel = AssignmentCreationModelFromJson(jsonString);
+//     final AssignmentSubmissionModel = AssignmentSubmissionModelFromJson(jsonString);
 
 import 'dart:convert';
 
-AssignmentCreationModel assignmentCreationModelFromJson(String str) => AssignmentCreationModel.fromJson(json.decode(str));
+AssignmentSubmissionModel assignmentSubmissionModelFromJson(String str) => AssignmentSubmissionModel.fromJson(json.decode(str));
 
-String assignmentCreationModelToJson(AssignmentCreationModel data) => json.encode(data.toJson());
+String assignmentSubmissionModelToJson(AssignmentSubmissionModel data) => json.encode(data.toJson());
 
-class AssignmentCreationModel {
-    AssignmentCreationModel({
-        this.title,
-        this.description,
-        this.points,
-        this.deadline,
+class AssignmentSubmissionModel {
+  // assignmentDetails is assignment_id -> int type
+    AssignmentSubmissionModel({
+        this.assignmentLink,
+        this.assignmentDetails,
     });
 
-    String title;
-    String description;
-    int points;
-    
-    DateTime deadline;
+    String assignmentLink;
+    int assignmentDetails;  
 
-    factory AssignmentCreationModel.fromJson(Map<String, dynamic> json) => AssignmentCreationModel(
-        title: json["title"],
-        description: json["description"],
-        points: json["points"],
-        deadline: DateTime.parse(json["deadline"]),
+    factory AssignmentSubmissionModel.fromJson(Map<String, dynamic> json) => AssignmentSubmissionModel(
+        assignmentLink: json["assignment_link"],
+        // assignmentDetails: json["assignment_details"],
     );
 
     Map<String, dynamic> toJson() => {
-        "title": title,
-        "description": description,
-        "points": points,
-        "deadline": deadline.toIso8601String(),
+        "assignment_link": assignmentLink,
+        "assignment_details": assignmentDetails,
     };
 }

@@ -43,6 +43,7 @@ class _AssignmentListStudentState extends State<AssignmentListStudent> {
               itemBuilder: (BuildContext ctx, index) {
                 return AssignmentBox(
                   assignment: assignmentController.assignmentList[index],
+                  classId: classroomId,
                 );
               });
         }
