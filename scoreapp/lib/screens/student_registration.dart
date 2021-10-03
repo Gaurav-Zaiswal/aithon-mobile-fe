@@ -204,10 +204,10 @@ class _StudentRegistrationState extends State<StudentRegistration> {
                                     apiService
                                         .registerStudent(requestModel)
                                         .then((value) {
-                                      if (value.token.isEmpty) {
+                                      if (value.username.isEmpty | value.email.isEmpty | value.firstName.isEmpty) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
-                                          content: Text(value.token),
+                                          content: Text("Could not register the student"),
                                         ));
                                       } else {
                                         // print(requestModel.toJson());
