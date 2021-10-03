@@ -66,7 +66,7 @@ class ClassBox extends StatelessWidget {
                   Text("Code: ",
                   style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(data.classCode),
+                  SelectableText(data.classCode),
                 ],
               ),
             ),

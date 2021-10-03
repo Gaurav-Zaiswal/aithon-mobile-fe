@@ -85,18 +85,17 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                                             .then((value) {
                                           classCodeController.clear();
                                           Get.offAllNamed("/home-student");
-
-                                          // ScaffoldMessenger.of(context)
-                                          //     .showSnackBar(SnackBar(
-                                          //   content: Text(
-                                          //       "Successfully Joined the classroom"),
-                                          //   dismissDirection:
-                                          //       DismissDirection.up,
-                                          // ));
-                                          // // send user to specific home page based on role
                                           // return directToHome();
                                         });
                                       } else {
+                                        ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                            content: Text(
+                                                "Some error occured while trying to join the classroom"),
+                                            dismissDirection:
+                                                DismissDirection.up,
+                                          ));
+                                          // // send user to specific home page based on role
                                         throw Exception("Validation Failed.");
                                       }
                                     },
