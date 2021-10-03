@@ -92,7 +92,7 @@ class APIService {
       RegisterTeacherRequestModel requestModel) async {
     // endpoint that lets any anonymous user to register as teacher
 
-    // String url = "https://reqres.in/api/register/";
+    // String url = "http://127.0.0. 1:8000/users/api/student-register/";
     String url =
         "https://gauravjaiswal.pythonanywhere.com/users/api/teacher-register/";
 
@@ -115,8 +115,7 @@ class APIService {
   Future<RegisterStudentResponseModel> registerStudent(
       RegisterStudentRequestModel requestModel) async {
     // endpoint that lets any anonymous user to register as student
-
-    // String url = "https://reqres.in/api/register/";
+    // String url = "http://192.168.1.100:8000/users/api/student-register/";
     String url =
         "https://gauravjaiswal.pythonanywhere.com/users/api/student-register/";
 
@@ -127,6 +126,7 @@ class APIService {
         response.statusCode == 201 ||
         response.statusCode == 400) {
       // invalid username pwd will have 400
+      print("----------------------------------> ${response.statusCode}");
       return RegisterStudentResponseModel.fromJson(json.decode(response.body));
     } else {
       print("----------------------------------> ${response.statusCode}");
@@ -145,7 +145,7 @@ class APIService {
     final response = await http.get(
       Uri.parse(url),
       headers: {
-        HttpHeaders.authorizationHeader: 'token ${token}',
+        HttpHeaders.authorizationHeader: 'token $token',
       },
     );
 

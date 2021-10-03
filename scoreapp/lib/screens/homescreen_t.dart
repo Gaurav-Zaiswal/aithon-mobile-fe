@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/controllers/classroom_controller.dart';
 import 'package:scoreapp/screens/main_drawer_teacher.dart';
-import 'dart:ui' as ui;
-import 'package:scoreapp/utils/HeaderFooter.dart';
+// import 'dart:ui' as ui;
+// import 'package:scoreapp/utils/HeaderFooter.dart';
 import 'package:scoreapp/widgets/class_widget_t.dart';
-import 'createclass.dart';
+// import 'createclass.dart';
 
 // homepage for teacher
 class HomeScreen extends StatefulWidget {
@@ -17,31 +18,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // instantiating classroom controller
-  final ClassroomController classroomController =
-      Get.put(ClassroomController());
+  List classroomList = [];
+
+  // final ClassroomController classroomController =
+  //     Get.put(ClassroomController());
+
+  @override
+  void initState() {
+    // TODO: implement initState -> load the data when this page is visited
+    super.initState();
+    loadClassrooms();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Widget buildClasses() => SliverToBoxAdapter(child: Obx(
-          () {
-            if (classroomController.isLoading.value)
-              return Center(child: CircularProgressIndicator());
-            else
-              return GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10),
-                  itemCount: classroomController.classroomList.length,
-                  primary: false,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext ctx, index) {
-                    return ClassBox(data: classroomController.classroomList[index],);
-                    // return ClassBox("gaurav jaiswal 1234");
-                  
-                  });
-          },
+    Widget buildClasses() => SliverToBoxAdapter(child: classroomList.isEmpty ?
+        Center(child: CircularProgressIndicator()) :
+            RefreshIndicator(
+                onRefresh: loadClassrooms,
+                child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10),
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    // itemCount: classroomController.classroomList.length,
+                    itemCount: classroomList.length,
+                    primary: false,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return ClassBox(
+                        data: classroomList[index],
+                      );
+                      // return ClassBox("gaurav jaiswal 1234");
+                    }),
+              
+          
         ));
 
     return Scaffold(
@@ -59,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             expandedHeight: 250,
             floating: true,
             stretch: true,
-            onStretchTrigger: refreshHome(),
+            // onStretchTrigger: loadClassrooms,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
@@ -80,7 +94,13 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  refreshHome() {
-    // call the API to fetch the data
+  Future loadClassrooms() async {
+    // call the API to fetch the classrooms
+    classroomList = await APIService.getClassrooms();
+    // final classroomList = classroomController.classroomList;
+    // print("classrooms are being loaded -------->${classroomList.last.className}");
+    setState(() {
+      this.classroomList = classroomList;
+    });
   }
 }

@@ -124,7 +124,7 @@ class _CreateClassroomState extends State<CreateClassroom> {
                                         ));
                                       } else {
                                         // print(requestModel.toJson());
-                                        Get.offNamed("/");  
+                                        Get.offNamed("/home-teacher");  
                                       }
                                     });
                                   } else {

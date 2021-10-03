@@ -14,6 +14,8 @@ import 'package:scoreapp/screens/student_registration.dart';
 import 'package:scoreapp/screens/teacher_registration.dart';
 import 'package:scoreapp/screens/videoconferencescreen.dart';
 
+import 'screens/temp_homescreen_t.dart';
+
 void main() => runApp(LoginApp());
 
 class LoginApp extends StatelessWidget {
@@ -30,7 +32,8 @@ class LoginApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/splash', page: () => SplashScreen()),
         GetPage(name: "/", page: () => HomeScreen()),
-        GetPage(name: "/home-teacher", page: () => HomeScreen()),
+        // GetPage(name: "/home-teacher", page: () => HomeScreenTeacher()),  // temp path for home page techer
+        GetPage(name: "/home-teacher", page: () => HomeScreen()), // permananet path for home page techer
         GetPage(name: "/home-student", page: () => HomeScreenStudent()),
         GetPage(name: "/register-teacher", page: () => TeacherRegistration()),
         GetPage(name: "/register-student", page: () => StudentRegistration()),
