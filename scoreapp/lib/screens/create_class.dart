@@ -56,7 +56,7 @@ class _CreateClassroomState extends State<CreateClassroom> {
                     margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                     decoration: BoxDecoration(
                       // color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(20),
+                      // borderRadius: BorderRadius.circular(20),
                     ),
                     child: Form(
                         key: globalFormKey,
@@ -106,8 +106,8 @@ class _CreateClassroomState extends State<CreateClassroom> {
                             // class creation button using material
                             Material(
                               elevation: 5.0,
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.lightGreen,
+                              // borderRadius: BorderRadius.circular(20),
+                              color: Colors.blue[400],
                               child: MaterialButton(
                                 minWidth: MediaQuery.of(context)
                                     .size
@@ -137,7 +137,9 @@ class _CreateClassroomState extends State<CreateClassroom> {
                                     throw Exception("Validation Failed.");
                                   }
                                 },
-                                child: Text("Create Classroom"),
+                                child: Text("Create Classroom",
+                                  style: TextStyle(color:Colors.white),
+                                ),
                               ),
                             ),
                           ],
