@@ -3,12 +3,9 @@ import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/utils/secure_storage.dart';
 
-class DetailPageDrawerTeacher extends StatelessWidget {
-  final int classId;
-  APIService _apiService = APIService();
-  // const DetailPageDrawerTeacher({Key key, @required classId}) : super(key: key);
-  DetailPageDrawerTeacher({@required this.classId});
-
+class MainDrawerStudent extends StatelessWidget {
+  // const MainDrawerStudent({ Key? key }) : super(key: key);
+  final APIService _apiService = APIService();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -16,30 +13,15 @@ class DetailPageDrawerTeacher extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical:30),
             color: Theme.of(context).primaryColor,
             child: Center(
               child: Column(
                 children: [
                   Text(
-                    'Aithon classroom',
+                    'Welcome back!',
                     style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  // SizedBox(
-                  //   height: 30,
-                  // ),
-                  // Text(
-                  //   'Class Code:',
-                  //   style: TextStyle(
-                  //     fontSize: 18,
-                  //   ),
-                  // ),
-                  // Text(
-                  //   'QsH56t',
-                  //   style: TextStyle(
-                  //     fontSize: 22,
-                  //   ),
-                  // ),
+                  )
                 ],
               ),
             ),
@@ -52,28 +34,32 @@ class DetailPageDrawerTeacher extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            onTap: () => Get.toNamed("/home-teacher"),
+            onTap: () {
+              Get.toNamed("/home-student");
+            },
           ),
           ListTile(
-            leading: Icon(Icons.create),
+            leading: Icon(Icons.class_),
             title: Text(
-              'Assignment Submissions',
+              'Classroom', // video calling
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
-            onTap: () => Get.toNamed("/submitted-assignment/$classId"),
+            onTap: () {
+              Get.toNamed("/classroom");
+            },
           ),
-          ListTile(
-            leading: Icon(Icons.create),
-            title: Text(
-              'Classroom',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            onTap: null,
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.add),
+          //   title: Text(
+          //     'Join a class',
+          //     style: TextStyle(
+          //       fontSize: 18,
+          //     ),
+          //   ),
+          //   onTap: null,
+          // ),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text(

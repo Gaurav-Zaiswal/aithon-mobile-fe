@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/controllers/classroom_controller.dart';
 import 'package:scoreapp/models/classroon_join_model.dart';
+import 'package:scoreapp/utils/main_drawer_s.dart';
 import 'package:scoreapp/utils/main_drawer_teacher.dart';
 import 'dart:ui' as ui;
 import 'package:scoreapp/utils/HeaderFooter.dart';
@@ -69,7 +70,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
       // appBar: AppBar(
       //   title: Text('Class Joined'),
       // ),
-      drawer: MainDrawerTeacher(),
+      drawer: MainDrawerStudent(),
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: poupJoin(context),
       //   label: Text("Join"),

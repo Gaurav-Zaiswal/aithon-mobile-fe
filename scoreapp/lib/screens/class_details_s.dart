@@ -49,7 +49,7 @@ class _ClassDetailsStudentState extends State<ClassDetailsStudent> {
       appBar: AppBar(
           // title: Text(classId),
           title: Text("Class Feeds")),
-      drawer: DetailPageDrawerTeacher(),
+      // drawer: DetailPageDrawerTeacher(),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed("/list-assignment/$classroomId"),
         child: Icon(Icons.assignment),
