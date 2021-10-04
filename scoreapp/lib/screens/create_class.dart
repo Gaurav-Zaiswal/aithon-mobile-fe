@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 // import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:scoreapp/models/create_classroom_model.dart';
+// import 'package:scoreapp/utils/detail_page_drawer_t.dart';
+import 'package:scoreapp/utils/main_drawer_teacher.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:scoreapp/models/login_model.dart';
@@ -38,7 +40,11 @@ class _CreateClassroomState extends State<CreateClassroom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Create a new Classroom"),
+      ),
       key: scaffoldKey,
+      drawer: MainDrawerTeacher(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -59,10 +65,10 @@ class _CreateClassroomState extends State<CreateClassroom> {
                             SizedBox(
                               height: 150,
                             ),
-                            Text(
-                              "Create Classroom",
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
+                            // Text(
+                            //   "Create Classroom",
+                            //   style: Theme.of(context).textTheme.headline2,
+                            // ),
                             SizedBox(
                               height: 25,
                             ),
