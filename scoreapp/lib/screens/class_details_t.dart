@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scoreapp/controllers/feedlistview_controller.dart';
+// import 'package:scoreapp/controllers/feedlistview_controller.dart';
 import 'package:scoreapp/widgets/bootomsheet_widget_assignment_post.dart';
-import 'package:scoreapp/widgets/bottomnavigation_widget_t.dart';
-import 'package:scoreapp/widgets/feed_widget.dart';
+// import 'package:scoreapp/widgets/bottomnavigation_widget_t.dart';
+// import 'package:scoreapp/widgets/feed_widget.dart';
 // import 'package:scoreapp/screens/main_drawer_teacher.dart';
 // import 'dart:ui' as ui;
 // import 'package:scoreapp/utils/HeaderFooter.dart';
@@ -21,13 +21,13 @@ class ClassDetailsTeacher extends StatefulWidget {
 }
 
 class _ClassDetailsTeacherState extends State<ClassDetailsTeacher> {
-  String feed;
-  bool hasTeacherRole;
-  FeedListController feedController;
+  // String feed;
+  // bool hasTeacherRole;
+  // FeedListController feedController;
   int classroomId = int.parse(Get.parameters["id"]);
 
   _ClassDetailsTeacherState() {
-    feedController = Get.put(FeedListController(classroomId));
+    // feedController = Get.put(FeedListController(classroomId));
   }
 
   // isTeacher() async {
@@ -60,7 +60,7 @@ class _ClassDetailsTeacherState extends State<ClassDetailsTeacher> {
       appBar: AppBar(
           // title: Text(classId),
           title: Text("Class Detail")),
-      // drawer: DetailPageDrawerTeacher(),
+      drawer: DetailPageDrawerTeacher( classId: classroomId,),
       // bottomNavigationBar: MyBottomNavigationT(),
       floatingActionButton: AssignmentFloatingActionButton(classId:classroomId),
       body: Center(

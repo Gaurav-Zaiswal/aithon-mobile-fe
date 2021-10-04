@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DetailPageDrawerTeacher extends StatelessWidget {
-  // const MainDrawerTeacher({ Key? key }) : super(key: key);
+  final int classId;
+  // const DetailPageDrawerTeacher({Key key, @required classId}) : super(key: key);
+  DetailPageDrawerTeacher({@required this.classId});
 
   @override
   Widget build(BuildContext context) {
@@ -16,37 +19,27 @@ class DetailPageDrawerTeacher extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Welcome, Teacher',
+                    'Aithon classroom',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'Class Code:',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                  Text(
-                    'QsH56t',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  // Text(
+                  //   'Class Code:',
+                  //   style: TextStyle(
+                  //     fontSize: 18,
+                  //   ),
+                  // ),
+                  // Text(
+                  //   'QsH56t',
+                  //   style: TextStyle(
+                  //     fontSize: 22,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.vpn_key),
-            title: Text(
-              'QsH56t',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            onTap: null,
           ),
           ListTile(
             leading: Icon(Icons.home),
@@ -56,17 +49,17 @@ class DetailPageDrawerTeacher extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            onTap: null,
+            onTap: () => Get.toNamed("/home-teacher"),
           ),
           ListTile(
             leading: Icon(Icons.create),
             title: Text(
-              'Create Assignments',
+              'Assignment Submissions',
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
-            onTap: null,
+            onTap: () => Get.toNamed("/submitted-assignment/$classId"),
           ),
           ListTile(
             leading: Icon(Icons.create),
