@@ -86,10 +86,10 @@ class _SubmittedAssignmentsState extends State<SubmittedAssignments> {
       drawer: DetailPageDrawerTeacher(
         classId: classroomId,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed("/list-assignment/$classroomId"),
-        child: Icon(Icons.assignment),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => Get.toNamed("/list-assignment/$classroomId"),
+      //   child: Icon(Icons.assignment),
+      // ),
       body: CustomScrollView(
         slivers: [buildSubmissions()],
       ),
