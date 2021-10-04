@@ -13,13 +13,13 @@ class MainDrawerTeacher extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical:30),
             color: Theme.of(context).primaryColor,
             child: Center(
               child: Column(
                 children: [
                   Text(
-                    'Welcome, Teacher',
+                    'Welcome back!',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   )
                 ],
@@ -35,7 +35,7 @@ class MainDrawerTeacher extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Get.toNamed("/");
+              Get.toNamed("/home-teacher");
             },
           ),
           ListTile(
@@ -62,16 +62,16 @@ class MainDrawerTeacher extends StatelessWidget {
               Get.toNamed("/classroom");
             },
           ),
-          ListTile(
-            leading: Icon(Icons.add),
-            title: Text(
-              'Join a class',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            onTap: null,
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.add),
+          //   title: Text(
+          //     'Join a class',
+          //     style: TextStyle(
+          //       fontSize: 18,
+          //     ),
+          //   ),
+          //   onTap: null,
+          // ),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text(
