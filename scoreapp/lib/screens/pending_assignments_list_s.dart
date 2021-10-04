@@ -11,7 +11,7 @@ import 'package:scoreapp/widgets/assignment_widget.dart';
 // import 'package:scoreapp/widgets/textfield_widget_for_feed.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'create_class.dart';
-import 'detail_page_drawer_t.dart';
+import '../utils/detail_page_drawer_t.dart';
 
 // classroom detail screen for teacher
 class AssignmentListStudent extends StatefulWidget {

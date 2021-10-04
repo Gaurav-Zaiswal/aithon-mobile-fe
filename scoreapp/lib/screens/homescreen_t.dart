@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scoreapp/api/api_service.dart';
 import 'package:scoreapp/controllers/classroom_controller.dart';
-import 'package:scoreapp/screens/main_drawer_teacher.dart';
+import 'package:scoreapp/utils/main_drawer_teacher.dart';
 // import 'dart:ui' as ui;
 // import 'package:scoreapp/utils/HeaderFooter.dart';
 import 'package:scoreapp/widgets/class_widget_t.dart';
