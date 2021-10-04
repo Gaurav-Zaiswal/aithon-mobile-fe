@@ -292,7 +292,7 @@ class APIService {
     } else {
       // print(token);
       print(
-          "-------------------------------------------------------->>>>>>>>> ${response.statusCode}");
+          "----------------------->>>>>>>>> ${response.statusCode}");
       throw Exception("Failed to join the classroom");
     }
   }
