@@ -58,8 +58,8 @@ class _SubmittedAssignmentsState extends State<SubmittedAssignments> {
     return Scaffold(
       appBar: AppBar(
           // title: Text(classId),
-          title: Text("Class Feeds")),
-      drawer: DetailPageDrawerTeacher(),
+          title: Text("Submitted Assignments")),
+      drawer: DetailPageDrawerTeacher(classId: classroomId,),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed("/list-assignment/$classroomId"),
         child: Icon(Icons.assignment),
