@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scoreapp/controllers/feedlistview_controller.dart';
 import 'package:scoreapp/controllers/submittedassignmentlist_view_controller.dart';
 import 'package:scoreapp/widgets/assignment_widget.dart';
@@ -33,24 +34,47 @@ class _SubmittedAssignmentsState extends State<SubmittedAssignments> {
 
   @override
   Widget build(BuildContext context) {
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     Widget buildSubmissions() => SliverToBoxAdapter(child: Obx(
           () {
             if (assignmentController.isLoading.value) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.builder(
-                  // itemCount: assignmentController.feedList.length,
-                  itemCount:
-                      assignmentController.submittedAssignmentList.length,
-                  primary: false,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext ctx, index) {
-                    return AssignmentSolutionBox(
-                      // classId: classroomId,
-                      submittedAssignment:
-                          assignmentController.submittedAssignmentList[index],
-                    );
-                  });
+                // itemCount: assignmentController.feedList.length,
+                itemCount: assignmentController.submittedAssignmentList.length,
+                primary: false,
+                shrinkWrap: true,
+                // >>>>>>>>>>> item builder old
+                // itemBuilder: (BuildContext ctx, index) {
+                //   return AssignmentSolutionBox(
+                //     // classId: classroomId,
+                //     submittedAssignment:
+                //         assignmentController.submittedAssignmentList[index],
+                //   );
+                // }
+                // >>>>>>>>>>> old item builder ends
+
+                // >>>>>>>>>>> expandable item builder starts
+                itemBuilder: (BuildContext ctx, index) {
+                  // here imple ment expnsion tile header
+                  return ExpansionTile(
+                      title: Text(
+                          "${assignmentController.submittedAssignmentList[index].student.user.firstName} ${assignmentController.submittedAssignmentList[index].student.user.lastName}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      subtitle: Text(
+                          "Submitted on: ${dateFormat.format(assignmentController.submittedAssignmentList[index].assignmentDetails.creationDate)}"),
+                      children: [
+                        AssignmentSolutionBox(
+                          // classId: classroomId,
+                          submittedAssignment: assignmentController
+                              .submittedAssignmentList[index],
+                        ),
+                      ]);
+                },
+                // >>>>>>>>>>> expandable list builder ends
+              );
             }
           },
         ));
@@ -59,7 +83,9 @@ class _SubmittedAssignmentsState extends State<SubmittedAssignments> {
       appBar: AppBar(
           // title: Text(classId),
           title: Text("Submitted Assignments")),
-      drawer: DetailPageDrawerTeacher(classId: classroomId,),
+      drawer: DetailPageDrawerTeacher(
+        classId: classroomId,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed("/list-assignment/$classroomId"),
         child: Icon(Icons.assignment),
