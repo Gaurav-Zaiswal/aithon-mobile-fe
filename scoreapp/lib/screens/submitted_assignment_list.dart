@@ -33,7 +33,7 @@ class _SubmittedAssignmentsState extends State<SubmittedAssignments> {
 
   @override
   Widget build(BuildContext context) {
-    Widget buildFeeds() => SliverToBoxAdapter(child: Obx(
+    Widget buildSubmissions() => SliverToBoxAdapter(child: Obx(
           () {
             if (assignmentController.isLoading.value) {
               return Center(child: CircularProgressIndicator());
@@ -65,11 +65,11 @@ class _SubmittedAssignmentsState extends State<SubmittedAssignments> {
         child: Icon(Icons.assignment),
       ),
       body: CustomScrollView(
-        slivers: [buildFeeds()],
+        slivers: [buildSubmissions()],
       ),
       // body: Center(
       //   // child: TextFieldForFeed(classRoomId: this.classroomId),
-      //   child: buildFeeds(),
+      //   child: buildSubmissions(),
       // ),
     );
   }

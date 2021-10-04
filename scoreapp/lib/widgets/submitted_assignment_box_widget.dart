@@ -15,7 +15,7 @@ class AssignmentSolutionBox extends StatelessWidget {
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     if (submittedAssignment.assignmentLink == null)
       return ListTile(
-          // tileColor: Colors.grey[600],
+          tileColor: Colors.grey[600],
           leading: Icon(Icons.info),
           title: Text(
             "Description of solution here",
@@ -42,8 +42,9 @@ class AssignmentSolutionBox extends StatelessWidget {
           ));
     else
       return ListTile(
-          // tileColor: Colors.grey[600],
-          leading: Icon(Icons.info),
+          tileColor: Colors.grey[300],
+          leading: Icon(Icons.link_rounded),
+          trailing: Icon(Icons.arrow_right),
           title: Text(
             submittedAssignment.assignmentDetails.title,
             style: TextStyle(color: Colors.blue[700]),

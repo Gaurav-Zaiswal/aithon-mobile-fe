@@ -53,7 +53,7 @@ class _AssignmentListStudentState extends State<AssignmentListStudent> {
     return Scaffold(
       appBar: AppBar(
           title: Text("Pending Assignments")),
-      drawer: DetailPageDrawerTeacher(),
+      // drawer: DetailPageDrawerTeacher(),
       body: Container(
       color: Colors.grey[200],
 
