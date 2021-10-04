@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 // import 'package:scoreapp/controllers/classroom_controller.dart';
 import 'package:scoreapp/models/feed_list_model.dart';
 // import 'package:scoreapp/models/home_screen_model.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeedBox extends StatelessWidget {
   FeedBox({@required this.feed});
@@ -41,12 +43,28 @@ class FeedBox extends StatelessWidget {
     else
       return ListTile(
           // tileColor: Colors.grey[600],
+          minVerticalPadding: 15,
           leading: Icon(Icons.info),
-          title: Text(
-            feed.feedDescription,
-            style: TextStyle(color: Colors.blue[700]),
-          ),
-          dense: false,
+          title: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Linkify(
+                onOpen: (link) async {
+                  if (await canLaunch(link.url)) {
+                    await launch(link.url);
+                  } else {
+                    throw 'Could not launch $link';
+                  }
+                },
+                text: feed.feedDescription,
+                style: TextStyle(color: Colors.black87),
+                linkStyle: TextStyle(color: Colors.blue),
+              )
+
+              // Text(
+              //   feed.feedDescription,
+              //   style: TextStyle(color: Colors.black87),
+              // ),
+              ),
           subtitle: Row(
             children: [
               Text(
