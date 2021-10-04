@@ -11,6 +11,7 @@ import 'package:scoreapp/screens/loginscreen.dart';
 import 'package:scoreapp/screens/pending_assignments_list_s.dart';
 import 'package:scoreapp/screens/splash_screen.dart';
 import 'package:scoreapp/screens/student_registration.dart';
+import 'package:scoreapp/screens/submitted_assignment_list.dart';
 import 'package:scoreapp/screens/teacher_registration.dart';
 import 'package:scoreapp/screens/videoconferencescreen.dart';
 
@@ -47,6 +48,7 @@ class LoginApp extends StatelessWidget {
         GetPage(name: "/classroom", page: () => VideoConferenceScreen()),
         GetPage(name: "/create-assignemnt", page: () => LoginScreen()),
         GetPage(name: "/list-assignment/:id", page: () => AssignmentListStudent()),
+        GetPage(name: "/submitted-assignment/:id", page: () => SubmittedAssignments())
       ]
     ); 
   }

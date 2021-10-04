@@ -14,6 +14,7 @@ import "dart:convert";
 import 'package:scoreapp/models/login_model.dart';
 import 'package:scoreapp/models/register_student_model.dart';
 import 'package:scoreapp/models/register_teacher_model.dart';
+import 'package:scoreapp/models/submitted_assignment_list_model.dart';
 import 'package:scoreapp/models/user_model.dart';
 import 'package:scoreapp/screens/create_assignment_t.dart';
 import 'package:scoreapp/utils/secure_storage.dart';
@@ -367,7 +368,7 @@ class APIService {
   Future<AssignmentSubmissionModel> submitAssignment(
       AssignmentSubmissionModel requestModel, int classId) async {
     // create feed for classroom
-    print("-----------------------> $classId");
+    // print("-----------------------> $classId");
     String url =
         "https://gauravjaiswal.pythonanywhere.com/assignment-api/$classId/submit";
     var token = await UserSecureStorage.getUserToken();
@@ -397,6 +398,29 @@ class APIService {
       // print(token);
       print(response.statusCode);
       throw Exception("Failed to submit the assignment");
+    }
+  }
+
+  static Future<List<SubmittedAssignmentListModel>> getSubmittedAssignments(int classId) async {
+
+    String url =
+        "https://gauravjaiswal.pythonanywhere.com/assignment-api/$classId/submitted-assignment-list";
+    var token = await UserSecureStorage.getUserToken();
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.authorizationHeader: 'token $token',
+      },
+    );
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400) {
+      var jsonString = response.body;
+      return submittedAssignmentListModelFromJson(jsonString);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to load the Data!');
     }
   }
 }
