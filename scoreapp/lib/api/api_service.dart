@@ -293,9 +293,9 @@ class APIService {
       // print(token);
       print(
           "----------------------->>>>>>>>> ${response.statusCode}");
-      throw Exception("Failed to join the classroom");
+       throw Exception("Failed to join the classroom");
     }
-  }
+  } 
 
   Future<AssignmentCreationModel> createAssignment(
       AssignmentCreationModel requestModel, int classId) async {

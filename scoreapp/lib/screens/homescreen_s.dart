@@ -67,9 +67,9 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         ));
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Class Joined'),
-      // ),
+      appBar: AppBar(
+        title: Text('Class Joined'),
+      ),
       drawer: MainDrawerStudent(),
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: poupJoin(context),
